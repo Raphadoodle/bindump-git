@@ -4,11 +4,17 @@ from os import system
 
 def main(filename):
     file=filename.split(".")
-    file=file[0]
+    if file[0] != "":
+        file=file[0]
+    else:
+        file=file[1] 
     bits=["0", "1", " "]
+    print("[Please Wait]: XXD is writing full data...", end="")
     system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
+    print("[DONE]")
     binfile=open(f"{file}-bindump.txt", "r").readlines()
     newbinfile=[]
+    print("[Please Wait]: Removing extra file dump...", end="")
     for i in range(0, len(binfile)-1):
         line=binfile[i]
         newline=""
@@ -23,10 +29,11 @@ def main(filename):
         newbinfile.append(newline+"\n")
     binfile=open(f"{file}-bindump.txt", "w")
     binfile.writelines(newbinfile)
+    print("[DONE]")
 if __name__ == "__main__":
     if len(argv)-1 == 1:
         getargval=argv[1]
-        if not "-" in getargval:
+        if not getargval[0] == "-":
             main(argv[1])
         else:
             if getargval == "-h" or getargval == "--help":
