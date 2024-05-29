@@ -1,8 +1,10 @@
 #!/bin/python
 from sys import argv
 from os import system
+from time import sleep
 
 def main(filename):
+    start=0
     file=filename.split(".")
     if file[0] != "":
         file=file[0]
@@ -10,7 +12,12 @@ def main(filename):
         file=file[1] 
     bits=["0", "1", " "]
     print("[Please Wait]: XXD is writing full data...", end="")
-    system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
+    if "/" in file:
+        pre=file.split("/")
+        pre=pre[len(pre)-1]
+        system("xxd -d -b {} > ./{}-bindump.txt".format(filename, pre))
+    else:
+        system("xxd -d -b {} > ./{}-bindump.txt".format(filename, file))
     print("[DONE]")
     binfile=open(f"{file}-bindump.txt", "r").readlines()
     newbinfile=[]
