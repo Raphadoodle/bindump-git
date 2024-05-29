@@ -3,8 +3,26 @@ from sys import argv
 from os import system
 
 def main(filename):
-    #Working on it
-
-
+    file=filename.split(".")
+    file=file[0]
+    bits=["0", "1", " "]
+    system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
+    binfile=open(f"{file}-bindump.txt", "r").readlines()
+    newbinfile=[]
+    for i in range(0, len(binfile)-1):
+        line=binfile[i]
+        newline=""
+        for l in range(0, len(line)-1):
+            if line[l]==":":
+                start=l
+                break
+            l+=1
+        for i in range(start, len(line)-1):
+            if line[i] in bits and i<64:
+                newline=newline+line[i]
+        newbinfile.append(newline+"\n")
+    binfile=open(f"{file}-bindump.txt", "w")
+    binfile.writelines(newbinfile)
 if __name__ == "__main__":
-    main(argv[1])
+    if argv[1] != None:
+        main(argv[1])
