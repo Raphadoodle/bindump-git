@@ -11,32 +11,29 @@ def main(filename):
     else:
         file=file[1] 
     bits=["0", "1", " "]
-    print("[Please Wait]: XXD is writing full data...", end="")
-    if "/" in file:
-        pre=file.split("/")
-        pre=pre[len(pre)-1]
-        system("xxd -d -b {} > ./{}-bindump.txt".format(filename, pre))
-    else:
-        system("xxd -d -b {} > ./{}-bindump.txt".format(filename, file))
-    print("[DONE]")
+    #print("[Please Wait]: XXD is writing full data...", end="")
+    system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
+    #print("[DONE]")
     binfile=open(f"{file}-bindump.txt", "r").readlines()
     newbinfile=[]
-    print("[Please Wait]: Removing extra file dump...", end="")
+    #print("[Please Wait]: Removing extra file dump...", end="")
     for i in range(0, len(binfile)-1):
         line=binfile[i]
         newline=""
         for l in range(0, len(line)-1):
-            if line[l]==":":
+            if line[l] == ":":    
                 start=l
-                break
-            l+=1
+        #print(f"Start: {start}")
         for i in range(start, len(line)-1):
             if line[i] in bits and i<64:
                 newline=newline+line[i]
         newbinfile.append(newline+"\n")
     binfile=open(f"{file}-bindump.txt", "w")
     binfile.writelines(newbinfile)
-    print("[DONE]")
+    if "/" in file:
+        system(f"mv {file}-bindump.txt .")
+    #print("[DONE]")
+
 if __name__ == "__main__":
     if len(argv)-1 == 1:
         getargval=argv[1]
