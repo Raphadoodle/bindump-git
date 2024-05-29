@@ -1,2 +1,10 @@
 #!/bin/python
+from sys import argv
+from os import system
 
+def main(filename):
+    #Working on it
+
+
+if __name__ == "__main__":
+    main(argv[1])
