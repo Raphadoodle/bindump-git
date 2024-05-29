@@ -32,6 +32,9 @@ def main(filename):
     binfile.writelines(newbinfile)
     if "/" in file:
         system(f"mv {file}-bindump.txt .")
+        file=file.split("/")
+        file=file[len(file)-1]
+    system(f"chmod -R 0444 ./{file}-bindump.txt")
     #print("[DONE]")
 
 if __name__ == "__main__":
