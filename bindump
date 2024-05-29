@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 print("To seek the binary contents of a file.")
                 print("This will create a file, which has the name of your file, followed by the word bindump. If you look inside that file, you will see all the bytes which are in your file.")
                 print("PLEASE NOTE: Use only as a developer, to find out what bugs are in your code.")
-            else:
+            else:    
                 print("bindump: invalid option {}".format(argv[1]))
     else:
-        print("Error. No file specified. Try -h for how to use this program.")
+        print("bindump: no file specified. Try --help -h for how to use this program.")
