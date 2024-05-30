@@ -11,7 +11,6 @@ def main(filename):
     else:
         file=file[1] 
     bits=["0", "1", " "]
-    #print("[Please Wait]: XXD is writing full data...", end="")
     system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
     binfile=open(f"{file}-bindump.txt", "r").readlines()
     newbinfile=[]
