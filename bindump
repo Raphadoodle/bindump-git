@@ -9,7 +9,8 @@ def main(filename):
     if file[0] != "":
         file=file[0]
     else:
-        file=file[1] 
+        file=file[1]
+    print(file) 
     bits=["0", "1", " "]
     system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
     binfile=open(f"{file}-bindump.txt", "r").readlines()
