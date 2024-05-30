@@ -13,17 +13,14 @@ def main(filename):
     bits=["0", "1", " "]
     #print("[Please Wait]: XXD is writing full data...", end="")
     system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
-    #print("[DONE]")
     binfile=open(f"{file}-bindump.txt", "r").readlines()
     newbinfile=[]
-    #print("[Please Wait]: Removing extra file dump...", end="")
     for i in range(0, len(binfile)-1):
         line=binfile[i]
         newline=""
         for l in range(0, len(line)-1):
             if line[l] == ":":    
                 start=l
-        #print(f"Start: {start}")
         for i in range(start, len(line)-1):
             if line[i] in bits and i<64:
                 newline=newline+line[i]
@@ -35,7 +32,6 @@ def main(filename):
         file=file.split("/")
         file=file[len(file)-1]
     system(f"chmod -R 0444 ./{file}-bindump.txt")
-    #print("[DONE]")
 
 if __name__ == "__main__":
     if len(argv)-1 == 1:
