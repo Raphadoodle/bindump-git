@@ -22,7 +22,7 @@ def main(filename):
         remove(file+"-bindump.txt")
     #print(file) 
     bits=["0", "1", " "]
-    system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
+    system("xxd -b {} > {}-bindump.txt".format(filename, file))
     binfile=open(f"{file}-bindump.txt", "r").readlines()
     newbinfile=[]
     for i in range(0, len(binfile)-1):
