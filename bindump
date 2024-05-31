@@ -1,12 +1,13 @@
 #!/bin/python
 from sys import argv
-from os import system
+from os import system, remove
+from os.path import isfile
 from time import sleep
 
 def main(filename):
     start=0
     file=filename.split(".")
-    print(file)
+    #print(file)
     if file[0] != "" and not "/" in file[0][len(file[0])-1]:
         file=file[0]
     elif len(file)-1 == 3:
@@ -17,7 +18,9 @@ def main(filename):
             file=file[3]
     else:
         file=file[1]
-    print(file) 
+    if isfile(file+"-bindump.txt"):
+        remove(file+"-bindump.txt")
+    #print(file) 
     bits=["0", "1", " "]
     system("xxd -d -b {} > {}-bindump.txt".format(filename, file))
     binfile=open(f"{file}-bindump.txt", "r").readlines()
