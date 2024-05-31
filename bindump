@@ -6,8 +6,11 @@ from time import sleep
 def main(filename):
     start=0
     file=filename.split(".")
-    if file[0] != "":
+    print(file)
+    if file[0] != "" and not "/" in file[0]:
         file=file[0]
+    elif len(file)-1 == 3:
+        file=file[3]
     else:
         file=file[1]
     print(file) 
