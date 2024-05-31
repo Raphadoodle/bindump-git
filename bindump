@@ -7,10 +7,14 @@ def main(filename):
     start=0
     file=filename.split(".")
     print(file)
-    if file[0] != "" and not "/" in file[0]:
+    if file[0] != "" and not "/" in file[0][len(file[0])-1]:
         file=file[0]
     elif len(file)-1 == 3:
-        file=file[3]
+        if file[2] != "/":
+            file=file[2]
+            file=file[1:]
+        else:
+            file=file[3]
     else:
         file=file[1]
     print(file) 
